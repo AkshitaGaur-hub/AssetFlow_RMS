@@ -4,15 +4,19 @@ from database import Base
 
 
 class User(Base):
-
     __tablename__="users"
-
     id=Column(Integer,primary_key=True,index=True)
     name=Column(String)
     email=Column(String,unique=True)
     password=Column(String)
-    role=Column(String,default="Employee")
-
+    role=Column(
+        String,
+        default="Employee"
+    )
+    status=Column(
+        String,
+        default="Pending"
+    )
 
 
 class Asset(Base):
@@ -40,10 +44,27 @@ class Allocation(Base):
 
     __tablename__="allocations"
 
-    id=Column(Integer,primary_key=True)
+    id = Column(
+        Integer,
+        primary_key=True
+    )
 
-    asset_id=Column(Integer,ForeignKey("assets.id"))
+    asset_id = Column(
+        Integer,
+        ForeignKey("assets.id")
+    )
 
-    employee_id=Column(Integer,ForeignKey("users.id"))
+    employee_id = Column(
+        Integer,
+        ForeignKey("users.id")
+    )
 
-    status=Column(String,default="Active")
+    requested_by = Column(
+        Integer,
+        ForeignKey("users.id")
+    )
+
+    status = Column(
+        String,
+        default="Pending"
+    )
