@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
 from database import get_db
+from dependencies import get_current_user
+from models import User
 from models import Asset
 from schemas import AssetCreate, AssetResponse
-
+from role_dependencies import role_required
+from models import User
 
 router = APIRouter(
     prefix="/assets",
@@ -16,7 +18,10 @@ router = APIRouter(
 @router.post("/", response_model=AssetResponse)
 def create_asset(
     asset: AssetCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(
+        role_required(["Admin", "Asset Manager"])
+    )
 ):
 
     # check duplicate tag
@@ -51,7 +56,14 @@ def create_asset(
 # GET ALL ASSETS
 @router.get("/", response_model=list[AssetResponse])
 def get_assets(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(
+        role_required([
+            "Admin",
+            "Asset Manager",
+            "Department Head"
+        ])
+    )
 ):
 
     assets = db.query(Asset).all()

@@ -1,18 +1,21 @@
-import React from "react";
+import React from 'react'
 
-function Benefits() {
+const Contact = () => {
   return (
-    <section className="benefits">  
-    <h2>Benefits of AssetFlow</h2>
-      <div className="benefit-list">
-        <div>
-          <h3>Efficiency</h3>
-          <p>Streamline asset and resource management processes.</p>
-        </div> 
-        </div> 
-        </section>
-        );
-        }
+    <>
+      <section className="benefits">
+        <h2>Benefits of AssetFlow</h2>
+        <div className="benefit-list">
+          <div>
+            <h3>Efficiency</h3>
+            <p>Streamline asset and resource management processes.</p>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
 
-    export default Contact;
-    
+export default Contact
+
+
