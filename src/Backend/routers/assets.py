@@ -13,6 +13,20 @@ router = APIRouter(
     tags=["Assets"]
 )
 
+@router.get("/my-assets")
+def my_assets(
+    db:Session=Depends(get_db),
+    user:User=Depends(get_current_user)
+):
+
+    assets = db.query(Asset).join(
+        Allocation
+    ).filter(
+        Allocation.employee_id == user.id
+    ).all()
+
+
+    return assets
 
 # CREATE ASSET
 @router.post("/", response_model=AssetResponse)
@@ -130,4 +144,34 @@ def delete_asset(
 
     return {
         "message": "Asset deleted successfully"
+    }
+
+@router.post("/allocate")
+def allocate_asset(
+    asset_id:int,
+    employee_id:int,
+    db:Session=Depends(get_db),
+    admin:User=Depends(role_required(["Admin"]))
+):
+
+    allocation = Allocation(
+        asset_id=asset_id,
+        employee_id=employee_id,
+        status="Active"
+    )
+
+    db.add(allocation)
+
+    asset=db.query(Asset).filter(
+        Asset.id==asset_id
+    ).first()
+
+    asset.status="Assigned"
+
+    db.commit()
+    db.refresh(allocation)
+
+
+    return {
+        "message":"Asset allocated successfully"
     }

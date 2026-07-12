@@ -1,7 +1,6 @@
-# from fastapi import HTTPException
-from sqlalchemy import Column,Integer,String,Date,ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from database import Base
-
 
 class User(Base):
     __tablename__="users"
@@ -18,7 +17,25 @@ class User(Base):
         default="Pending"
     )
 
+class AssetRequest(Base):
+    __tablename__ = "asset_requests"
 
+    id = Column(Integer, primary_key=True)
+
+    employee_id = Column(Integer, ForeignKey("users.id"))
+
+    asset_id = Column(Integer, ForeignKey("assets.id"))
+
+    status = Column(
+        String,
+        default="Pending"
+    )
+
+
+    employee = relationship("User")
+
+    asset = relationship("Asset")
+    
 class Asset(Base):
 
     __tablename__="assets"

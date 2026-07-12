@@ -3,9 +3,10 @@ from database import engine
 import models
 
 from routers import assets, users, allocation, dashboard
-
 from fastapi.middleware.cors import CORSMiddleware
-
+from routers import dashboard
+from routers import assets
+from routers import requests
 
 app = FastAPI(
     title="AssetFlow RMS"
@@ -31,6 +32,8 @@ app.include_router(assets.router)
 app.include_router(users.router)
 app.include_router(allocation.router)
 app.include_router(dashboard.router)
+app.include_router(assets.router)
+app.include_router(requests.router)
 
 
 @app.get("/")

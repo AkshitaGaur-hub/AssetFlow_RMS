@@ -54,19 +54,25 @@ const Dashboard = () => {
     }
 
     const totalAssets = dashboardData.total_assets || 0;
-    const assignedAssets = dashboardData.assigned_assets || 0;
-    const availableAssets = dashboardData.available_assets || 0;
-    const activeAllocations = dashboardData.active_allocations || 0;
 
-    const attendanceData = [
+    const assignedAssets =
+        dashboardData.assigned_assets || 0;
+
+    const availableAssets =
+        dashboardData.available_assets || 0;
+
+    const activeAllocations =
+        dashboardData.active_allocations || 0;
+
+    const assetStatusData = [
         {
-            event: "Available",
-            attendance: totalAssets > 0 ? Math.round((availableAssets / totalAssets) * 100) : 0,
+            name: "Available",
+            value: availableAssets
         },
         {
-            event: "Assigned",
-            attendance: totalAssets > 0 ? Math.round((assignedAssets / totalAssets) * 100) : 0,
-        },
+            name: "Assigned",
+            value: assignedAssets
+        }
     ];
 
 
@@ -84,14 +90,17 @@ const Dashboard = () => {
             <div className={`dashboard ${sidebarCollapsed ? "collapsed" : ""}`}>
                 <div className="dashboard-header">
                     <div>
-                        <h1>Employee Dashboard</h1>
+                        <h1>
+                            Welcome {dashboardData.name} 👋
+                        </h1>
+
                         <p>
                             Your asset and allocation overview.
                         </p>
                     </div>
-                    <Link to="/events">
+                    <Link to="/employee/assets">
                         <button className="browse-btn">
-                            Browse Events
+                            Browse assets
                         </button>
                     </Link>
                 </div>
@@ -122,23 +131,24 @@ const Dashboard = () => {
                         <div className="chart-header">
                             <div>
                                 <h3>
-                                    📊 Joined Events
+                                    📊 Asset Status
                                 </h3>
+
                                 <p>
-                                    Your registered events
+                                    Current asset availability
                                 </p>
                             </div>
                         </div>
-                        <EventChart data={attendanceData} />
+                        <EventChart data={assetStatusData} />
                     </div>
                     <div className="chart-card">
                         <div className="chart-header">
                             <div>
                                 <h3>
-                                    📅 Event Summary
+                                    Allocation Summary
                                 </h3>
                                 <p>
-                                    Your contribution overview
+                                    Your allocated assets
                                 </p>
                             </div>
                         </div>
