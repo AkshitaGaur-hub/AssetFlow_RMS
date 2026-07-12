@@ -1,11 +1,8 @@
-import React from 'react'
+import React from "react";
+import Landing from "./Frontend/Landing/JSX/Landing";
 
-const App = () => {
-  return (
-    <>
-    <p className='font-bold'>Hello</p>
-    </>
-  )
+function App() {
+  return <Landing />;
 }
 
-export default App
+export default App;

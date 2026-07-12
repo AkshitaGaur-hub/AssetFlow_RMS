@@ -1,0 +1,18 @@
+.footer{
+        background: #111827;
+    color:white !important;
+}
+.footer .navbar-brand {
+  color: white !important;
+}
+
+.footer .nav-link {
+  color: white !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer .nav-link:hover {
+  color: #dbeafe !important;
+}
