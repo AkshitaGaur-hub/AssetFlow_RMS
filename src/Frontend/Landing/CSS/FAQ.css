@@ -35,13 +35,13 @@
   margin-bottom: 20px;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
   transition: 0.3s ease;
 }
 
 .faq-item:hover {
   border-color: rgba(37, 99, 235, 0.4);
-  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.05);
 }
 
 .faq-question {

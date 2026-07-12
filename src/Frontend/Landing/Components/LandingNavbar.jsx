@@ -21,10 +21,11 @@ export default function LandingNavbar() {
         <Link to="/login">
           <button className="login-btn">Login</button>
         </Link>
+        <Link to="/register">
+          <button className="login-btn">Get started</button>
+        </Link>
 
-        <button className="get-started-btn">
-          Get Started
-        </button>
+       
       </div>
 
     </nav>
