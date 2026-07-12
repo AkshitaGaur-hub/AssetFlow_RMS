@@ -46,8 +46,8 @@ const Dashboard = () => {
       {/* Header */}
       <div className="dashboard-header">
         <div>
-<h1>Event Management Dashboard</h1>
-<p>Monitor events, registrations, volunteers, and analytics from one place.</p>
+<h1>AssetFlow Admin Dashboard</h1>
+<p>Monitor assets, departments, maintenance requests, resource bookings and organizational activities from one place.</p>
 
         </div>
         <div className="dashboard-date">

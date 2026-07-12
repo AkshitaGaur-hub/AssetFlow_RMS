@@ -1,6 +1,6 @@
 import React from "react";
 
-function Benefits() {
+function Contact() {
   return (
     <section className="benefits">  
     <h2>Benefits of AssetFlow</h2>
