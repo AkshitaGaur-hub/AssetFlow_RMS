@@ -119,9 +119,12 @@ def login(
 
 
     return {
-        "access_token": token,
-        "token_type": "bearer"
-    }
+    "access_token": token,
+    "token_type": "bearer",
+    "user_id": user.id,
+    "name": user.name,
+    "role": user.role
+}
 
 @router.get("/admin/pending")
 def get_pending_users(

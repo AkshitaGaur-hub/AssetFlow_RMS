@@ -3,6 +3,8 @@ import "./App.css";
 import { Toaster } from "react-hot-toast";
 
 import Landing from "./Frontend/Landing/JSX/Landing";
+import Login from "./Frontend/Login/Login";
+import Register from "./Frontend/Register/Register";
 
 import AdminRouter from "./Frontend/admin/AdminRouter";
 import EmployeeRouter from "./Frontend/employee/EmployeeRouter";
@@ -13,15 +15,13 @@ function App() {
       <Toaster position="top-right" />
 
       <Routes>
-        {/* Landing Page */}
         <Route path="/" element={<Landing />} />
 
-        {/* Admin */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
         <Route path="/admin/*" element={<AdminRouter />} />
-
-        {/* Employee */}
         <Route path="/employee/*" element={<EmployeeRouter />} />
-
       </Routes>
     </BrowserRouter>
   );
