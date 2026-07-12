@@ -1,0 +1,215 @@
+.departments {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px;
+  background: #f8fafc;
+}
+
+.department-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.department-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.department-header p {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.add-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.department-search {
+  margin-bottom: 25px;
+}
+
+.department-search input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+  background: #fff;
+}
+
+.department-search input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.department-table {
+  background: #fff;
+  border-radius: 15px;
+  overflow-x: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.department-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.department-table thead {
+  background: #eff6ff;
+}
+
+.department-table th {
+  padding: 18px;
+  text-align: left;
+  color: #1e293b;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.department-table td {
+  padding: 18px;
+  color: #475569;
+  border-top: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.department-table tbody tr {
+  transition: 0.3s;
+}
+
+.department-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.status-active {
+  display: inline-block;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status-inactive {
+  display: inline-block;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  background: #1d4ed8;
+}
+
+.delete-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+@media (max-width: 992px) {
+  .departments {
+    padding: 20px;
+  }
+
+  .department-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .department-table {
+    overflow-x: auto;
+  }
+
+  .department-table table {
+    min-width: 700px;
+  }
+
+  .department-header h1 {
+    font-size: 26px;
+  }
+
+  .department-header p {
+    font-size: 14px;
+  }
+
+  .department-search input {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .departments {
+    padding: 15px;
+  }
+
+  .department-header h1 {
+    font-size: 22px;
+  }
+
+  .add-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
