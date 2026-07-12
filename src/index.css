@@ -1,13 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --text: ;
-  --text-h: ;
-  --bg: ;
-  --border: ;
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Text */
+  --text: #cbd5e1;         /* Slate 300 */
+  --text-h: #ffffff;       /* White headings */
+
+  /* Background */
+  --bg: #111827;           /* Same as Tailwind bg-gray-900 */
+
+  /* Border */
+  --border: #374151;       /* Gray 700 */
+
+  /* Fonts */
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
+}
 
-  }
-
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.15) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  color: var(--text);
+  font-family: var(--sans);
+}
