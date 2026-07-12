@@ -1,7 +1,11 @@
 .footer{
-        background: #111827;
-    color:white !important;
+       display: flex;
+    text-align: center;
+    padding: 20px;
+    justify-content: center;
+    background-color: #1c2d53;
 }
+
 .footer .navbar-brand {
   color: white !important;
 }

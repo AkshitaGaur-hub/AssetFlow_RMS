@@ -1,8 +1,22 @@
 .dashboard {
-    /* margin-left: 260px;   Sidebar width */
-    margin-top: 70px;     /* Navbar height */
-    padding: 15px 30px 30px;
+    margin-left: 260px;
+    margin-top: 70px;
+    padding: 20px 30px 30px;
+    min-height: calc(100vh - 70px);
     color: white;
+    background: #0b1120;
+    transition: margin-left 0.3s ease;
+}
+
+.dashboard.collapsed {
+    margin-left: 80px;
+}
+
+@media (max-width:768px) {
+    .dashboard {
+        margin-left: 0;
+        padding: 20px 18px 30px;
+    }
 }
 
 /* Header */
@@ -11,7 +25,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding: 24px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.04);
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.32);
 }
 
 .dashboard-header h1 {
@@ -49,7 +68,7 @@
 .dashboard-cards {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
     gap: 24px;
 }
 

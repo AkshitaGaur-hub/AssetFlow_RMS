@@ -1,3 +1,13 @@
+nav{
+    padding: 20px;
+    background-color: #1c2d53;
+}
+
+.login-nav-btn{
+    background-color: #285dcd;
+    padding:10px;
+}
+
 @media (max-width:800px) {
     .left{
         display: none;

@@ -1,11 +1,19 @@
-import React from 'react'
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 
-const EmployeeRouter = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+function EmployeeRouter(){
+
+    return(
+        <Routes>
+
+            <Route 
+              path="/dashboard" 
+              element={<Dashboard />}
+            />
+
+        </Routes>
+    );
+
 }
 
-export default EmployeeRouter
+export default EmployeeRouter;

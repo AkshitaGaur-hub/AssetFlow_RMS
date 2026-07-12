@@ -4,7 +4,7 @@ import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 const Footer = () => {
   return (
 
-    <nav className="navbar navbar-expand-lg footer">
+    <footer className="navbar navbar-expand-lg footer">
       <div className="container-fluid d-flex flex-column align-items-center py-2 bg-transparent">
 
         <span className="navbar-brand">
@@ -30,7 +30,7 @@ const Footer = () => {
         </ul>
       </div>
 
-    </nav>
+    </footer>
   );
 };
 

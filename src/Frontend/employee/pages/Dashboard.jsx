@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-import DashboardCard from "../../../components/DashboardCard";
-import EventChart from "../../../components/EventChart";
-import CategoryChart from "../../../components/CategoryChart";
+import DashboardCard from "../../components/DashboardCard";
+import EventChart from "../../components/EventChart";
+// import CategoryChart from "../../../components/CategoryChart";
 import { Link } from "react-router-dom";
-
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
-import DashboardCard from "../../../components/DashboardCard";
-import EventChart from "../../../components/EventChart";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Sidebar from "../../components/Siderbar"
 
 import {
     FaCalendarAlt,
@@ -18,27 +15,22 @@ import {
     FaUserCheck,
 } from "react-icons/fa";
 
-import "../Employee_css/Dashboard.css";
+import "../../employee/pages/dashboard.css";
 
 
 const Dashboard = () => {
-
-
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const [dashboardData, setDashboardData] = useState(null);
 
 
-    // Temporary logged in user id
-
-
     useEffect(() => {
-
         const token = localStorage.getItem("token");
 
         console.log("Dashboard token:", token);
 
-
         axios.get(
-            "http://127.0.0.1:8000/dashboard/volunteer",
+            "http://127.0.0.1:8000/dashboard/stats",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -46,238 +38,117 @@ const Dashboard = () => {
             }
         )
             .then((res) => {
-
                 console.log(res.data);
                 setDashboardData(res.data);
-
             })
             .catch((err) => {
-
                 console.log(
                     "Dashboard error:",
-                    err.response?.data
+                    err.response?.data || err.message
                 );
-
             });
-
-
     }, []);
 
     if (!dashboardData) {
-
-        return (
-            <h2>
-                Loading Dashboard...
-            </h2>
-        )
-
+        return <h1>Loading dashboard...</h1>;
     }
 
+    const totalAssets = dashboardData.total_assets || 0;
+    const assignedAssets = dashboardData.assigned_assets || 0;
+    const availableAssets = dashboardData.available_assets || 0;
+    const activeAllocations = dashboardData.active_allocations || 0;
 
-
-    // Event attendance chart
-    const attendanceData = dashboardData.events.map(
-        (event) => ({
-
-            event: event.title,
-
-            attendance: 100
-
-        })
-    );
-
-
-
-    // Event status chart
-
-    const eventStatusData = [
-
+    const attendanceData = [
         {
-            name: "Approved",
-            value: dashboardData.events_joined
+            event: "Available",
+            attendance: totalAssets > 0 ? Math.round((availableAssets / totalAssets) * 100) : 0,
         },
-
         {
-            name: "Hours",
-            value: dashboardData.hours_completed
-        }
-
+            event: "Assigned",
+            attendance: totalAssets > 0 ? Math.round((assignedAssets / totalAssets) * 100) : 0,
+        },
     ];
 
 
 
 
     return (
-
-        <div className="dashboard">
-
-
-            <div className="dashboard-header">
-
-                <div>
-
-                    <h1>
-                        Volunteer Dashboard
-                    </h1>
-
-
-                    <p>
-                        Welcome back {dashboardData.name}! Track your volunteer journey.
-                    </p>
-
-                </div>
-
-
-
-                <Link to="/events">
-
-                    <button className="browse-btn">
-
-                        Browse Events
-
-                    </button>
-
-                </Link>
-
-
-            </div>
-
-
-
-
-
-            <div className="dashboard-cards">
-
-
-                <DashboardCard
-
-                    title="Events Joined"
-
-                    value={dashboardData.events_joined}
-
-                    icon={<FaCalendarAlt />}
-
-                />
-
-
-
-                <DashboardCard
-
-                    title="Hours Completed"
-
-                    value={dashboardData.hours_completed}
-
-                    icon={<FaClock />}
-
-                />
-
-
-
-                <DashboardCard
-
-                    title="Certificates"
-
-                    value="1"
-
-                    icon={<FaCertificate />}
-
-                />
-
-
-
-                <DashboardCard
-
-                    title="Attendance"
-
-                    value="42%"
-
-                    icon={<FaUserCheck />}
-
-                />
-
-
-            </div>
-
-
-
-
-
-            <div className="chart-grid">
-
-
-                <div className="chart-card">
-
-
-                    <div className="chart-header">
-
-                        <div>
-
-                            <h3>
-                                📊 Joined Events
-                            </h3>
-
-
-                            <p>
-                                Your registered events
-                            </p>
-
-
-                        </div>
-
+        <>
+            <Navbar onSidebarToggle={() => setSidebarOpen(!sidebarOpen)} />
+            <Sidebar
+                collapsed={sidebarCollapsed}
+                setCollapsed={setSidebarCollapsed}
+                isOpen={sidebarOpen}
+                setIsOpen={setSidebarOpen}
+            />
+            <div className={`dashboard ${sidebarCollapsed ? "collapsed" : ""}`}>
+                <div className="dashboard-header">
+                    <div>
+                        <h1>Employee Dashboard</h1>
+                        <p>
+                            Your asset and allocation overview.
+                        </p>
                     </div>
-
-
-
-                    <EventChart data={attendanceData} />
-
-
-
+                    <Link to="/events">
+                        <button className="browse-btn">
+                            Browse Events
+                        </button>
+                    </Link>
                 </div>
-
-
-
-
-
-                <div className="chart-card">
-
-
-                    <div className="chart-header">
-
-                        <div>
-
-                            <h3>
-                                📅 Event Summary
-                            </h3>
-
-
-                            <p>
-                                Your contribution overview
-                            </p>
-
-
+                <div className="dashboard-cards">
+                    <DashboardCard
+                        title="Total Assets"
+                        value={totalAssets}
+                        icon={<FaCalendarAlt />}
+                    />
+                    <DashboardCard
+                        title="Assigned Assets"
+                        value={assignedAssets}
+                        icon={<FaClock />}
+                    />
+                    <DashboardCard
+                        title="Available Assets"
+                        value={availableAssets}
+                        icon={<FaCertificate />}
+                    />
+                    <DashboardCard
+                        title="Active Allocations"
+                        value={activeAllocations}
+                        icon={<FaUserCheck />}
+                    />
+                </div>
+                <div className="chart-grid">
+                    <div className="chart-card">
+                        <div className="chart-header">
+                            <div>
+                                <h3>
+                                    📊 Joined Events
+                                </h3>
+                                <p>
+                                    Your registered events
+                                </p>
+                            </div>
                         </div>
-
-
+                        <EventChart data={attendanceData} />
                     </div>
-
-
-
-
-                    <CategoryChart data={eventStatusData} />
-
-
-
+                    <div className="chart-card">
+                        <div className="chart-header">
+                            <div>
+                                <h3>
+                                    📅 Event Summary
+                                </h3>
+                                <p>
+                                    Your contribution overview
+                                </p>
+                            </div>
+                        </div>
+                        {/* <CategoryChart data={eventStatusData} /> */}
+                    </div>
                 </div>
-
-
             </div>
-
-
-        </div>
-
+            <Footer />
+        </>
     );
-
-
 };
 
 
